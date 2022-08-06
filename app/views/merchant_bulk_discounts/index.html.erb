@@ -3,5 +3,6 @@
 <% @merchant.bulk_discounts.each do |disc| %>
   <div id="disc-<%= disc.id %>">
     <p>Current Offer: <%= disc.name %> - <%= disc.pct_discount %>% Off for <%= disc.qty_threshold %> Items!</p>
+    <%= link_to "#{disc.name} Info.", "/merchants/#{@merchant.id}/bulk_discounts/#{disc.id}" %>
   </div>
 <% end %>
