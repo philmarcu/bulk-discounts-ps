@@ -327,4 +327,18 @@ RSpec.describe 'Merchant Show Dashboard' do
           expect(page).to_not have_content(invoice_1.created_at)
         end
     end
+
+    it 'has a link to the merchants discount index page' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+      discount_1 = merchant_1.bulk_discounts.create!(name: "Bob's Special", qty_threshold: 10, pct_discount: 15)
+      discount_2 = merchant_1.bulk_discounts.create!(name: "Heavy Metal", qty_threshold: 6, pct_discount: 10)
+      discount_3 = merchant_1.bulk_discounts.create!(name: "Beeeeeeees?!!??!!", qty_threshold: 20, pct_discount: 40)
+
+      visit "/merchants/#{merchant_1.id}/dashboard"
+
+      click_on "#{merchant_1.name} My Discounts"
+
+      expect(page).to have_current_path("/merchants/#{merchant_1.id}/bulk_discounts")
+    end
 end
