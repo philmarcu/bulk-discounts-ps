@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     get '/items/:item_id', to: 'merchant_items#show'
     get '/items/:item_id/edit', to: 'merchant_items#edit'
     patch '/items/:item_id', to: 'merchant_items#update'
+
+    get '/bulk_discounts', to: 'merchant_bulk_discounts#index'
+    get '/bulk_discounts/:id', to: 'merchant_bulk_discounts#show'
   end
   
   get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
