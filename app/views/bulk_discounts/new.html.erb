@@ -1,2 +1,2 @@
 <h1>New Bulk Discount for <%= @merchant.name %></h1>
-  <%= render partial: 'shared/new', locals: { path: "/merchants/#{@merchant.id}/bulk_discounts", method: :post, button_text: 'Create'} %>
+  <%= render partial: 'shared/form', locals: { path: "/merchants/#{@merchant.id}/bulk_discounts", method: :post, button_text: 'Create'} %>

@@ -9,7 +9,7 @@ RSpec.describe 'bulk discount index page' do
       discount_2 = merchant_1.bulk_discounts.create!(name: "Heavy Metal", qty_threshold: 6, pct_discount: 10)
       discount_3 = merchant_1.bulk_discounts.create!(name: "Beeeeeeees?!!??!!", qty_threshold: 20, pct_discount: 40)
 
-      visit "/merchants/#{merchant_1.id}/bulk_discounts"
+      visit merchant_bulk_discounts_path(merchant_1.id)
 
       within "#disc-#{discount_1.id}" do
         expect(page).to have_selector(:link_or_button, "Bob's Special Info.")
@@ -36,14 +36,3 @@ RSpec.describe 'bulk discount index page' do
     end
   end
 end
-
-# Merchant Bulk Discounts Index
-
-# As a merchant
-# When I visit my merchant dashboard
-# Then I see a link to view all my discounts
-# When I click this link
-# Then I am taken to my bulk discounts index page
-# Where I see all of my bulk discounts including their
-# percentage discount and quantity thresholds
-# And each bulk discount listed includes a link to its show page
