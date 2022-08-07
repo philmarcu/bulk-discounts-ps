@@ -5,7 +5,7 @@ RSpec.describe 'bulk discounts new / create' do
     it 'renders the new form' do
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
 
-      visit "/merchants/#{merchant_1.id}/bulk_discounts/new"
+      visit new_merchant_bulk_discount_path(merchant_1.id)
 
       expect(page).to have_content('New Bulk Discount for Spongebob The Merchant')
       expect(find('form')).to have_content('Name')
@@ -16,7 +16,7 @@ RSpec.describe 'bulk discounts new / create' do
     it 'creates bulk discount & goes to index page' do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
-      visit "/merchants/#{merchant_1.id}/bulk_discounts/new"
+      visit new_merchant_bulk_discount_path(merchant_1.id)
 
       fill_in('Name', with: 'Super Saleeee!')
       fill_in('Quantity Threshold', with: 12)
