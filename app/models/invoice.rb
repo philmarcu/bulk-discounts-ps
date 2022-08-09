@@ -42,7 +42,6 @@ class Invoice < ApplicationRecord
         amt = min.rate * total_revenue
         return (total_revenue - amt).to_i 
       else 
-        return nil
       end
     end
   end
