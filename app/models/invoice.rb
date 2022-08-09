@@ -38,7 +38,7 @@ class Invoice < ApplicationRecord
           return (total_revenue - amt).to_i
         elsif discount.qty_threshold >= item.quantity
           arr = discounts.rotate(1)
-          arr.each do |d|
+          arr.sum do |d|
             if d.qty_threshold <= item.quantity
               amt = d.rate * total_revenue
               return (total_revenue - amt).to_i
