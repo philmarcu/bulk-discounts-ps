@@ -5,3 +5,6 @@
 
 <h3>Total Revenue</h3>
 <%= "Total Revenue: #{number_to_currency(@invoice.total_revenue.fdiv(100))}"%>
+
+<h3>Discounted Revenue</h3>
+<%= "Discounted Revenue: #{number_to_currency(@invoice.discount_revenue.fdiv(100))}" %>
