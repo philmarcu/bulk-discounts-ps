@@ -5,6 +5,11 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item
   belongs_to :invoice
+  has_many :bulk_discounts, through: :item
 
   enum status: { "pending" => 0, "packaged" => 1, "shipped" => 2 }
+
+  def applied_discount 
+    binding.pry
+  end
 end
