@@ -19,7 +19,11 @@ class Invoice < ApplicationRecord
    invoice_items.sum("unit_price * quantity")
   end
 
-  def discount_revenue
-    binding.pry
+  def discount_items
+    invoice_items.joins(item: :bulk_discounts)
+    .select('invoice_items.*, invoice_items.quantity AS qty')
+    .where('bulk_discounts.qty_threshold <= invoice_items.quantity')
+    .order('qty desc')
+    .distinct
   end
 end
