@@ -29,19 +29,22 @@ class Invoice < ApplicationRecord
   end
 
   def discount_revenue
-    discounts = bulk_discounts.distinct
-    max = discounts.max_by {|d| d.pct_discount }
-    min = discounts.min_by {|d| d.pct_discount }
+    discounts = bulk_discounts.distinct.sort_by {|d| d.pct_discount }.reverse
 
-    
-    discount_items.sum do |item|
-      if max.qty_threshold <= item.quantity
-        amt = max.rate * total_revenue
-        return (total_revenue - amt).to_i   
-      elsif min.qty_threshold <= item.quantity
-        amt = min.rate * total_revenue
-        return (total_revenue - amt).to_i 
-      else 
+    discounts.sum do |discount|
+      discount_items.sum do |item|
+        if discount.qty_threshold <= item.quantity
+          amt = discount.rate * total_revenue
+          return (total_revenue - amt).to_i
+        elsif discount.qty_threshold >= item.quantity
+          arr = discounts.rotate(1)
+          arr.each do |d|
+            if d.qty_threshold <= item.quantity
+              amt = d.rate * total_revenue
+              return (total_revenue - amt).to_i
+            end
+          end
+        end
       end
     end
   end
