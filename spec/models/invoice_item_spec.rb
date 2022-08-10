@@ -40,11 +40,11 @@ RSpec.describe InvoiceItem do
       discount_1 = merchant_1.bulk_discounts.create!(name: "November Deal - Black Thursday!", qty_threshold: 10, pct_discount: 12)
       discount_2 = merchant_1.bulk_discounts.create!(name: "Crazy Fall Sale", qty_threshold: 15, pct_discount: 25)
 
-      expect(invoice_item_1.applied_discount).to eq(discount_2)
+      expect(invoice_item_1.applied_discount).to eq(nil)
       expect(invoice_item_2.applied_discount).to eq(discount_2)
       expect(invoice_item_3.applied_discount).to eq(nil)
       expect(invoice_item_4.applied_discount).to eq(discount_1)
-      expect(invoice_item_5.applied_discount).to eq(discount_2)
+      expect(invoice_item_5.applied_discount).to eq(discount_1)
       expect(invoice_item_6.applied_discount).to eq(nil)
     end
   end

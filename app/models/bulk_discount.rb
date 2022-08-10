@@ -10,8 +10,4 @@ class BulkDiscount < ApplicationRecord
   def rate
     (self.pct_discount * 0.01).round(2)
   end
-
-  def self.max_pct
-    binding.pry
-  end
 end
