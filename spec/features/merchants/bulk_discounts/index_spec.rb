@@ -35,4 +35,20 @@ RSpec.describe 'bulk discount index page' do
       expect(page).to_not have_content("6 Items - Quantity Minimum for Discount")
     end
   end
+
+  describe 'holiday API user story' do
+    it 'shows the next three upcoming holidays' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+      discount_1 = merchant_1.bulk_discounts.create!(name: "Bob's Special", qty_threshold: 10, pct_discount: 15)
+      discount_2 = merchant_1.bulk_discounts.create!(name: "Heavy Metal", qty_threshold: 6, pct_discount: 10)
+      discount_3 = merchant_1.bulk_discounts.create!(name: "Beeeeeeees?!!??!!", qty_threshold: 20, pct_discount: 40)
+
+      visit merchant_bulk_discounts_path(merchant_1.id)
+
+      expect(page).to have_content("Labour Day, 2022-09-05")
+      expect(page).to have_content("Columbus Day, 2022-10-10")
+      expect(page).to have_content("Veterans Day, 2022-11-11")
+    end
+  end
 end

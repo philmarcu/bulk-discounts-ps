@@ -1,3 +1,14 @@
+<div class="flex-container">
+  <div id='title'>
+    <h3><%= @merchant.name %></h3>
+  </div>
+    <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th>&emsp;
+      <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th>&emsp;
+      <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>
+    </div>
+</div>
+
 <h1><%= @merchant.name %>'s Bulk Discounts Index </h1>
 
 <% @merchant.bulk_discounts.each do |disc| %>
@@ -5,4 +16,9 @@
     <p>Current Offer: <%= disc.name %> - <%= disc.pct_discount %>% Off for <%= disc.qty_threshold %> Items!</p>
     <%= link_to "#{disc.name} Info.", "/merchants/#{@merchant.id}/bulk_discounts/#{disc.id}" %>
   </div>
+<% end %>
+
+<h3>Upcoming Holidays</h3>
+<% @holidays.each do |holiday| %>
+    <p><%= holiday.name %>, <%= holiday.date %></p>
 <% end %>

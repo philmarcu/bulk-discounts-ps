@@ -55,7 +55,17 @@ namespace :load_csv do
   ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
+  task :bulk_discounts => :environment do
+    csv_text = File.read('./db/data/bulk_discounts.csv')
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      BulkDiscount.create!(row.to_hash)
+    end
+  ActiveRecord::Base.connection.reset_pk_sequence!('bulk_discounts')
+  end
+
   task delete_all: :environment do
+    BulkDiscount.destroy_all
     InvoiceItem.destroy_all
     Item.destroy_all
     Merchant.destroy_all
@@ -65,7 +75,7 @@ namespace :load_csv do
     puts "'Delete All' Complete"
   end
 
-  task all: [:merchants, :items, :customers, :invoices, :invoice_items, :transactions] do
+  task all: [:merchants, :items, :customers, :invoices, :invoice_items, :transactions, :bulk_discounts] do
     puts 'All CSV Files Complete & Loaded'
   end
 
