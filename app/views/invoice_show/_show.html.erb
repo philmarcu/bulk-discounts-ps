@@ -7,4 +7,9 @@
 <%= "Total Revenue: #{number_to_currency(@invoice.total_revenue.fdiv(100))}"%>
 
 <h3>Discounted Revenue</h3>
-<%= "Discounted Revenue: #{number_to_currency(@invoice.discount_revenue.fdiv(100))}" %>
+
+<% if @invoice.disc_amount > 0 %>
+  <%= "Discounted Revenue: #{number_to_currency((@invoice.total_revenue - @invoice.disc_amount)/100)}" %>
+<% else %>
+  <%= "Discounted Revenue: N/A" %>
+<% end %>
