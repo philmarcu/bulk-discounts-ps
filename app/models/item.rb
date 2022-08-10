@@ -31,4 +31,14 @@ class Item < ApplicationRecord
   end
 end
 
+  # def applied_discount
+  #   bulk_discounts.joins(:invoice_items)
+  #   .select('bulk_discounts.*, bulk_discounts.pct_discount AS pct')
+  #   .where('invoice_items.quantity >= bulk_discounts.qty_threshold')
+  #   .group('bulk_discounts.id, invoice_items.id')
+  #   .order('pct desc')
+  #   .first
+  #   binding.pry
+  # end
+
 
