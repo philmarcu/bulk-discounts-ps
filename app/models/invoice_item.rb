@@ -8,11 +8,4 @@ class InvoiceItem < ApplicationRecord
   has_many :bulk_discounts, through: :item
 
   enum status: { "pending" => 0, "packaged" => 1, "shipped" => 2 }
-
-  # def applied_discount 
-  #   bulk_discounts.select('bulk_discounts.*, max(bulk_discounts.pct_discount) as pct')
-  #   .group('bulk_discounts.id')
-  #   .first
-  #   binding.pry
-  # end
 end
